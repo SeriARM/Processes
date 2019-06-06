@@ -8,7 +8,26 @@
 
 int main(void)
 {
-    // Your code here
+   int x = 10;
+    printf("Before Fork - x: %d\n", x);
+    int rc = fork();
+    printf("After Fork - x: %d\n", x);
+    x += x;
+    printf("After Fork - x + x: %d\n", x);
+   if (rc == 0) {
+        printf("Child (pid: %d) - x: ", (int) getpid());
+        printf("%d\n", x);
+        x *= 2;
+        printf("Child (pid: %d) - x * 2: ", (int) getpid());
+        printf("%d\n", x);
+    } else {
+        printf("Parent (pid: %d) - x: ", (int) getpid());
+        printf("%d\n", x);
+        x /= 2;
+        printf("Parent (pid: %d) - x / 2: ", (int) getpid());
+        printf("%d\n", x);
+    }
+
 
     return 0;
 }
