@@ -14,7 +14,10 @@ int main(void)
     printf("After Fork - x: %d\n", x);
     x += x;
     printf("After Fork - x + x: %d\n", x);
-   if (rc == 0) {
+       if (rc < 0) {
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if (rc == 0) {
         printf("Child (pid: %d) - x: ", (int) getpid());
         printf("%d\n", x);
         x *= 2;
